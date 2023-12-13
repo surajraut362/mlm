@@ -27,5 +27,4 @@ public class Referral {
     @JoinColumn(name = "refer_by")
     private User referBy;
 
-
 }

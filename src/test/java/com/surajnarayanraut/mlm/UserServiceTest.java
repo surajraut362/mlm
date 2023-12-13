@@ -38,7 +38,7 @@ public class UserServiceTest {
         User userData=mapper.map(demo, User.class);
         when(userRepo.existsByEmail("s@gmail.com")).thenReturn(false);
         when(userRepo.save(userData)).thenReturn(userData);
-        assertEquals(userData,userService.register(demo));
+        assertEquals(userData,userService.register(demo,-1L));
 
 
     }
@@ -47,8 +47,10 @@ public class UserServiceTest {
     {
         UserRegDto demo=UserRegDto.builder().email("s@gmail.com").name("Suraj").password("12345").role(Role.USER).build();
         when(userRepo.existsByEmail("s@gmail.com")).thenReturn(true);
-        Exception e=assertThrows(ValidationException.class,()->{userService.register(demo);});
+        Exception e=assertThrows(ValidationException.class,()->{userService.register(demo,-1L);});
         assertEquals("email exists", e.getMessage());
     }
+
+
 
 }

@@ -3,40 +3,39 @@ package com.surajnarayanraut.mlm.service;
 import com.surajnarayanraut.mlm.dto.UserRegDto;
 import com.surajnarayanraut.mlm.entity.User;
 import com.surajnarayanraut.mlm.exception.ValidationException;
-import com.surajnarayanraut.mlm.repository.CommissionRepo;
 import com.surajnarayanraut.mlm.repository.UserRepo;
-import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
 public class UserService {
-    private static final int MAX_LEVEL = 4;
     final ModelMapper modelMapper;
 
     final UserRepo userRepo;
+    final  ReferralService referralService;
 
-
-    public UserService(ModelMapper modelMapper, UserRepo userRepo
-                       ) {
+    public UserService(ModelMapper modelMapper, UserRepo userRepo,
+                       ReferralService referralService) {
         this.modelMapper = modelMapper;
         this.userRepo = userRepo;
+        this.referralService = referralService;
     }
 
-    public User findUserById(Long id , String msg) {
-        return userRepo.findById(id).orElseThrow(() -> new ValidationException(msg));
-    }
-    public User findUserById(Long id) {
-        return findUserById(id, "user not found");
-    }
-    public User register(UserRegDto dto) {
+
+    @Transactional
+    public User register(UserRegDto dto,Long referredBy) {
         getValidationError(dto).ifPresent((msg) -> {
             throw new ValidationException(msg);
         });
+        if(referredBy!=-1)
+        userRepo.findById(referredBy).orElseThrow(()->new ValidationException("Referre Doesn't Exist"));
         User user=modelMapper.map(dto, User.class);
-        return userRepo.save(user);
+        userRepo.saveAndFlush(user);
+        referralService.addReferral(referredBy,user.getId());
+        return user;
 
     }
     private Optional<String> getValidationError(UserRegDto dto) {
