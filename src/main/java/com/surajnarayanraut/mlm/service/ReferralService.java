@@ -29,27 +29,28 @@ public class ReferralService {
     }
 
 
-    public User findUserById(Long id , String msg) {
+    public User findUserById(Long id, String msg) {
         return userRepo.findById(id).orElseThrow(() -> new ValidationException(msg));
     }
+
     public User findUserById(Long id) {
         return findUserById(id, "user not found");
     }
 
-    public Optional<String> referalAlreadyExists(User userReferredTo)
-    {
-        if(referralRepo.referalAlreadyExists(userReferredTo))
+    public Optional<String> referalAlreadyExists(User userReferredTo) {
+        if (referralRepo.referalAlreadyExists(userReferredTo))
             return Optional.of("User has been already referred");
         return Optional.empty();
     }
+
     @Transactional
     public void addReferral(Long referBy, Long referTo) {
         User userReferredTo = findUserById(referTo);
 
-        User userRefereedBy=null;
-        if(referBy!=-1)
-        userRefereedBy= findUserById(referBy);
-        referalAlreadyExists(userReferredTo).ifPresent((msg)->
+        User userRefereedBy = null;
+        if (referBy != -1)
+            userRefereedBy = findUserById(referBy);
+        referalAlreadyExists(userReferredTo).ifPresent((msg) ->
         {
             throw new ValidationException(msg);
         });
@@ -60,8 +61,8 @@ public class ReferralService {
         referral.setReferBy(userRefereedBy);
         referralRepo.save(referral);
 
-        while(level < MAX_LEVEL) {
-            if(userRefereedBy == null) break;
+        while (level < MAX_LEVEL) {
+            if (userRefereedBy == null) break;
             Commission commission = new Commission();
             commission.setReferBy(userRefereedBy);
             commission.setReferTo(userReferredTo);

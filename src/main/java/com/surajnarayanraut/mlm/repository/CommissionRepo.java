@@ -13,6 +13,5 @@ import java.util.List;
 
 public interface CommissionRepo extends JpaRepository<Commission, Long> {
     @Query("select new com.surajnarayanraut.mlm.dto.CommissionDto(com.percentage, referTo.name, referTo.id) from Commission com JOIN com.referBy referBy JOIN com.referTo referTo where referBy.id = :userId")
-
     List<CommissionDto> list(Long userId);
 }

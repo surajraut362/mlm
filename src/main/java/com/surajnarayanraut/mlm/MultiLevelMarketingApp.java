@@ -21,6 +21,7 @@ public class MultiLevelMarketingApp {
     public ModelMapper getModelMapper() {
         return new ModelMapper();
     }
+
     @Bean
     public Docket productApi() {
         return new Docket(DocumentationType.SWAGGER_2)

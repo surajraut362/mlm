@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ReferralRepo extends JpaRepository<Referral,Long> {
+public interface ReferralRepo extends JpaRepository<Referral, Long> {
 
     @Query("select ref.referBy from Referral ref where ref.referTo.id = :user")
     Optional<User> findRefferedBy(Long user);
