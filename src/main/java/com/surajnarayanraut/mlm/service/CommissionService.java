@@ -1,6 +1,6 @@
 package com.surajnarayanraut.mlm.service;
 
-import com.surajnarayanraut.mlm.entity.Commission;
+import com.surajnarayanraut.mlm.dto.CommissionDto;
 import com.surajnarayanraut.mlm.repository.CommissionRepo;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,8 @@ public class CommissionService {
         this.commissionRepo = commissionRepo;
     }
 
-    public List<Commission> listCommissions(Long userId) {
-        return null;
+    public List<CommissionDto> listCommissions(Long userId) {
+        return commissionRepo.list(userId);
+
     }
 }
