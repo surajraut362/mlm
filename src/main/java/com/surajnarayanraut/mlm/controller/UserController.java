@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
+
     final UserService userService;
     public UserController(UserService userService) {
         this.userService = userService;
@@ -16,6 +17,10 @@ public class UserController {
     @PostMapping("/register")
     void register(@Validated @RequestBody UserRegDto dto,@RequestParam(value = "referredBy") Long referredBy) {
         userService.register(dto,referredBy);
+    }
+    @PostMapping("/login")
+    void login(@Validated @RequestBody UserRegDto dto) {
+        userService.authenticate(dto);
     }
 
 
