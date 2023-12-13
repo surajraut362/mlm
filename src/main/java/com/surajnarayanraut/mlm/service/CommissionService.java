@@ -24,6 +24,6 @@ public class CommissionService {
     }
 
     public List<Commission> listCommissions(Long userId) {
-        return commissionRepo.list(userId);
+        return null;
     }
 }

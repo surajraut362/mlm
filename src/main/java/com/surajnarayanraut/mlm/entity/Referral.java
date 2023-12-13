@@ -28,5 +28,4 @@ public class Referral {
     private User referBy;
 
 
-
 }

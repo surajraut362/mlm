@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 
-public interface CommissionRepo extends JpaRepository<Commission,Long> {
-    List<Commission> list(Long userId);
+public interface CommissionRepo extends JpaRepository<Commission, Long> {
+
 }

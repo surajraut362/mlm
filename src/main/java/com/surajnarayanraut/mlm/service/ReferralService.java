@@ -1,15 +1,15 @@
 package com.surajnarayanraut.mlm.service;
 
-import com.surajnarayanraut.mlm.repository.RefferalRepo;
+import com.surajnarayanraut.mlm.repository.ReferralRepo;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RefferalService {
+public class ReferralService {
 
-    final RefferalRepo refferalRepo;
+    final ReferralRepo referralRepo;
 
-    public RefferalService(RefferalRepo refferalRepo) {
-        this.refferalRepo = refferalRepo;
+    public ReferralService(ReferralRepo referralRepo) {
+        this.referralRepo = referralRepo;
     }
 
     public void addReferral(Long referBy, Long referTo) {

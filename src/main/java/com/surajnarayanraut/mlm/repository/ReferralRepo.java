@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RefferalRepo extends JpaRepository<Referral,Long> {
+public interface ReferralRepo extends JpaRepository<Referral,Long> {
 }

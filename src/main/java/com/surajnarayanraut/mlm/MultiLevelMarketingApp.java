@@ -8,12 +8,11 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class MultiLevelMarketingApp {
     public static void main(String[] args) {
-        SpringApplication.run(MultiLevelMarketingApp.class,args);
+        SpringApplication.run(MultiLevelMarketingApp.class, args);
     }
 
     @Bean
-    public ModelMapper getModelMapper()
-    {
+    public ModelMapper getModelMapper() {
         return new ModelMapper();
     }
 }

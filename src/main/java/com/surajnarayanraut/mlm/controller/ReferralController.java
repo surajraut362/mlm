@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ReferralController {
     @PostMapping("/{referBy}/{referTo}")
-    void addReferral(@PathVariable Long referBy, @PathVariable Long referTo){
+    void addReferral(@PathVariable Long referBy, @PathVariable Long referTo) {
 
     }
 }

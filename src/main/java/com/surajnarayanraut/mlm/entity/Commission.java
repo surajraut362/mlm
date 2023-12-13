@@ -19,7 +19,7 @@ public class Commission {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne( fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "refer_to")
     private User referTo;
 
